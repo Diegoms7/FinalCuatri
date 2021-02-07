@@ -1,0 +1,80 @@
+package TrabajoFinal2;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+
+
+/**
+ *
+ * @author diego
+ */
+public class CharCounter {
+    
+    final static char FINAL = '.' ;
+    final static char SPACE = ' ';
+    final static char LANE = '\n' ;
+    final static int END = -1;
+    public char text;
+    public FileReader reader;
+    public BufferedReader entrada;
+    char[] FILE = new char [50];
+   
+    public void charFinder () throws Exception {
+        
+        while(text == SPACE || text == LANE ){
+            text = (char) entrada.read();
+        }
+        
+    }
+    
+    public void wordSkip () throws Exception {
+        
+        while (text != END && text != SPACE && text != LANE ){
+            text = (char) entrada.read();
+        }
+        
+        
+        
+    }
+    public int letterCounter (int counter) throws Exception {
+        
+        fileName(FILE);
+        reader = new FileReader(""+FILE+"" );
+        entrada = new BufferedReader(reader);
+        
+        counter = 0;
+        charFinder();
+        if( text != SPACE && text != LANE){
+            counter++; }
+        else {
+            text = (char) entrada.read();
+        }
+        return counter;
+    }
+
+    public int wordCounter (int counter) throws Exception {
+      
+        fileName(FILE);
+        reader = new FileReader(""+FILE+"");
+        entrada = new BufferedReader(reader);
+        
+        counter = 0;
+        charFinder();
+        while ( text != END ){
+            wordSkip();
+            counter++;
+            charFinder();
+            
+        }
+        return counter;
+            
+    }
+    
+    
+    public char[] fileName (char[] fileName) {
+
+        System.out.println("Introduce the file you want to analyse. Please, do not forget to write .txt at the end");
+        char[] name = LT.readLine();
+        return name;
+    }
+}
